@@ -21,7 +21,11 @@ public class MainPageTest {
 
     @Test
     public void signIn() {
-        SignInPage signInPage = mainPage.clickLogIn();
+       System.out.println("aaa");
+       Boolean heading = mainPage.equals("Yahoo");
+
+      //SignInPage signInPage = mainPage.clickLogIn();
+
     }
 
     @AfterClass                              // виполнится после выполнения всех методов
