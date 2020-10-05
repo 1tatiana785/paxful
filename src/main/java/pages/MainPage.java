@@ -22,9 +22,8 @@ public class MainPage {
         return text;
     }
 
-    public CreateAccountPage click() {
+    public void click() {
         driver.findElement(searchField).click();
-        return new CreateAccountPage(driver);
     }
 
     public SignInPage clickLogIn() {

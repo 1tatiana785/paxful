@@ -25,10 +25,10 @@ public class CreateAccountPage {
     public CreateAccountPage(WebDriver driver) {this.driver = driver;
     }
 
-    public CreateAccountPage typeFirstName (String firstname) {
+    public void typeFirstName (String firstname) {
         driver.findElement(firstNameField).sendKeys("");
-        return this;
-    }
+           }
+
     public CreateAccountPage typeLastName (String lastname) {
         driver.findElement(lastNameField).sendKeys("");
         return this;
@@ -62,18 +62,18 @@ public class CreateAccountPage {
         return this;
     }
 
-    /*
-    public NewAccountPage register (String firstname, String lastname, String email, String password, String phone, String day, String year, String gender){
-        this.typeFirstName (firstname);
-        this.typeLastName (lastname);
-        this.typeEmail (email);
-        this.typePassword (password);
-        this.typePhone (phone);
-        this.typeDay (day);
-        this.typeYear (year);
-        this.typeGender (gender);
-        this.clickContinue();
-        return new NewAccountPage();
+
+    public void register (String firstname, String lastname, String email, String password, String phone, String day, String year, String gender){
+        typeFirstName (firstname);
+        typeLastName (lastname);
+        typeEmail (email);
+        typePassword (password);
+        typePhone (phone);
+        typeDay (day);
+        typeYear (year);
+        typeGender (gender);
+        clickContinue();
+
     }
 
      */
