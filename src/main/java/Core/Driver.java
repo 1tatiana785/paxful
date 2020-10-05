@@ -14,7 +14,7 @@ final public class Driver {
        if (driver == null) {
            switch (typeDriver) {
                case "Chrome":
-                  // new ChromeDriver(new ChromeOptions());
+                   new ChromeDriver(new ChromeOptions());
            }
        }
        return driver;
