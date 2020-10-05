@@ -1,36 +1,41 @@
+import Core.Driver;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.SignInPage;
-import java.util.concurrent.TimeUnit;
+
+import static org.testng.Assert.assertEquals;
 
 public class MainPageTest {
     private WebDriver driver;
     private MainPage mainPage;
 
-    @BeforeClass                            // виполнится перед выполнением всех методов
-    public void beforeClassMethod() {
-        System.setProperty("webdriver.gecko.driver", "C:\\_projects\\testSelenium\\drivers\\geckodriver.exe");
-        driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://yahoo.com/");
-        mainPage = new MainPage(driver);
+    @BeforeTest                           //  запускаеться перед каждым тестовым методом
+    public void setUp() {
+        this.driver = Driver.InitialDriver();
     }
+
 
     @Test
     public void signIn() {
-       System.out.println("aaa");
-       Boolean heading = mainPage.equals("Yahoo");
+        // assertEquals(driver.getTitle(),"Yahoo!");      /// работает
 
-      //SignInPage signInPage = mainPage.clickLogIn();
+        MainPage page = new MainPage().titleText();
+        assertEquals(page, "Yahoo!");
+    }
+}
 
+   /* @Test
+    public void click() {
+        mainPage.clickLogIn();
+
+        //SignInPage signInPage = mainPage.clickLogIn();
     }
 
+
     @AfterClass                              // виполнится после выполнения всех методов
-    public void afterClassMethod (){
-        driver.quit();
+    public void afterClassMethod() {
+        // driver.quit();
     }
 }
 
