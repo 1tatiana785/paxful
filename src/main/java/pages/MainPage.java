@@ -1,6 +1,7 @@
 package pages;
 
 import Core.Driver;
+import Core.WebElment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -10,14 +11,15 @@ public class MainPage {
     private By signInButton = By.id("login-signin");
     private By titleText = By.xpath("//title[text()='Yahoo']");
     private WebDriver driver;
+    WebElment element = new WebElment();
 
     public void MainPage() {
-        this.driver = Driver.InitialDriver();
+        this.driver = Driver.InitialDriver("Firefox");
     }
 
-    public MainPage titleText() {
-        driver.findElement(titleText).getText();
-        return this;
+    public String getTitleText() {
+        String text = element.watVisibve(titleText).getText();
+        return text;
     }
 
     public CreateAccountPage click() {

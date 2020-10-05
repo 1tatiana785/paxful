@@ -7,21 +7,19 @@ import pages.MainPage;
 import static org.testng.Assert.assertEquals;
 
 public class MainPageTest {
-    private WebDriver driver;
-    private MainPage mainPage;
+    private MainPage mainPage = new MainPage();
 
-    @BeforeTest                           //  запускаеться перед каждым тестовым методом
+    /*@BeforeTest                           //  запускаеться перед каждым тестовым методом
     public void setUp() {
-        this.driver = Driver.InitialDriver();
-    }
+       }
+      */
 
 
     @Test
-    public void signIn() {
-        // assertEquals(driver.getTitle(),"Yahoo!");      /// работает
-
-        MainPage page = new MainPage().titleText();
-        assertEquals(page, "Yahoo!");
+    public void checkTitle() {
+        Driver.InitialDriver("Firefox").get("https://www.yahoo.com/");
+        String actualeText = mainPage.getTitleText();
+        assertEquals(actualeText, "Yahoo!");
     }
 }
 

@@ -13,7 +13,7 @@ public class SignInPage {
     private WebDriver driver;
 
     public void SignInPage() {
-        this.driver = Driver.InitialDriver();
+        this.driver = Driver.InitialDriver("Firefox");
     }
 
     public SignInPage typeUserName(String username) {

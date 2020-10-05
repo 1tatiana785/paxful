@@ -19,7 +19,7 @@ public class CreateAccountPage {
 
     private WebDriver driver;
     public void CreateAccountPage() {
-        this.driver = Driver.InitialDriver();
+        this.driver = Driver.InitialDriver("Firefox");
     }
 
     public CreateAccountPage(WebDriver driver) {this.driver = driver;

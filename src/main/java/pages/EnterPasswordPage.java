@@ -12,7 +12,7 @@ public class EnterPasswordPage {
     private WebDriver driver;
 
     public void EnterPasswordPage() {
-        this.driver = Driver.InitialDriver();
+        this.driver = Driver.InitialDriver("Firefox");
     }
 
     public EnterPasswordPage typePassword(String password) {
