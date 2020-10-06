@@ -8,12 +8,12 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 final public class Driver {
 
-    private static WebDriver driver;
+    private static WebDriver driver = null;
 
-    private Driver() {
-    }
+    /*private Driver() {
+    }*/
 
-    private void InitialDriver () {
+    public static WebDriver getDriver() {
         String typeDriver = "Firefox";
         if (driver == null) {
             switch (typeDriver) {
@@ -29,10 +29,7 @@ final public class Driver {
                 }
             }
         }
-        this.driver = driver;
-    }
 
-    public static WebDriver getDriver() {
         return driver;
     }
 }

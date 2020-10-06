@@ -30,21 +30,28 @@ public class MainPage {
         String text = element.watVisibility(titleText).getText();
         return text;
     }*/
-    public void startPage (String URL) {
-        Driver.getDriver().get("URL");
+
+    public void startPage () {
+        Driver.getDriver().get("http://yahoo.com/");
     }
 
     public MainPage typeSearchField(String text) {
         Driver.getDriver().findElement(searchField).sendKeys("text");
         return this;
     }
-
-    public void clickSearchButton() {
-        Driver.getDriver().findElement(searchButton).click();
+    public MainPage clearSearchField() {
+        Driver.getDriver().findElement(searchField).clear();
+        return this;
     }
 
-    public void clickMailLink() {
+    public SearchPage clickSearchButton() {
+        Driver.getDriver().findElement(searchButton).click();
+        return new SearchPage();
+    }
+
+    public MainPage clickMailLink() {
         Driver.getDriver().findElement(mailLink).click();
+        return this;
     }
 
     public void clickCoronavirusLink() {
