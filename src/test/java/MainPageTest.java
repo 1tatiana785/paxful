@@ -1,25 +1,32 @@
 import Core.Driver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.MainPage;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.assertEquals;
 
 public class MainPageTest {
-    private MainPage mainPage = new MainPage();
 
+    private MainPage mainPage = new MainPage();
     /*@BeforeTest                           //  запускаеться перед каждым тестовым методом
     public void setUp() {
        }
       */
 
-
     @Test
-    public void checkTitle() {
-        Driver.InitialDriver("Firefox").get("https://www.yahoo.com/");
-        String actualeText = mainPage.getTitleText();
-        assertEquals(actualeText, "Yahoo!");
+    public void maimPageTest() {
+
+        mainPage.startPage("http://yahoo.com/");
+        mainPage.typeSearchField("text11");
+        mainPage.clickSearchButton();
+
+        /*String actualeText = mainPage.getTitleText();
+        assertEquals(actualeText, "Yahoo!");*/
     }
 }
 
