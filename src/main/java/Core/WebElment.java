@@ -9,10 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WebElment {
 
     public WebDriverWait waitEl() {
-        WebDriverWait waitE = new WebDriverWait(Driver.getDriver(), 30);
+        WebDriverWait waitE = new WebDriverWait(Driver.getDriver(), 300);
         waitE.ignoring(NoSuchElementException.class);
         return waitE;
     }
+
     /*public WebElement watVisibility (By locator) {
         return waitEl().until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
@@ -23,6 +24,5 @@ public class WebElment {
 
     public WebElement watClick(WebElement element) {
         return waitEl().until(ExpectedConditions.elementToBeClickable(element));
-    }
-*/
+    }*/
 }

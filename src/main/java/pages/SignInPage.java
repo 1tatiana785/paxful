@@ -17,7 +17,7 @@ public class SignInPage {
     /*public SignInPage clickCreateAccount() {
         Driver.getDriver().findElement(createAccountButton).click();
         return ;
-    }     */
+    }   */
 
     public EnterPasswordPage singInNext(String username) {
         this.typeUserName(username);

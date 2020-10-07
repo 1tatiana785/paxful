@@ -4,14 +4,15 @@ import Core.Driver;
 import Core.WebElment;
 import org.openqa.selenium.By;
 
+
 public class MainPage {
 
     private By searchField = By.id("ybar-sbq");
-    private By searchButton = By.className("rapid-noclick-resp _yb_bx4y3");
-    private By signInButton = By.id("login-signin");
+    private By searchButton = By.className("rapid-noclick-resp");
+    private By signInButton = By.className("_yb_19y2m");
     private By titleText = By.xpath("//title[text()='Yahoo']");
-    private By mailLink = By.linkText(" Mail ");
-    private By coronavirusLink = By.linkText(" Coronavirus  ");
+    private By mailLink = By.className("_yb_1qge5 ");
+    private By coronavirusLink = By.partialLinkText("Coronavirus");
     private By newsLink = By.linkText(" News  ");
     private By financeLink = By.linkText(" Finance  ");
     private By sportsLink = By.linkText(" Sports  ");
@@ -22,12 +23,17 @@ public class MainPage {
     private By shoppingLink = By.linkText("Shopping  ");
     private By premiumOffersLink = By.linkText(" Premium Offers  ");
     private By moreLink = By.linkText(" More...  ");
-
+    private By loginNameLink = By.className("_yb_z3kiw");
+    private By emailLoginName = By.className("_yb_1611y");
 
     WebElment element = new WebElment();
 
+        public MainPage getTitle() {
+        Driver.getDriver().getTitle();
+        return this;
+    }
     /*public String getTitleText() {
-        String text = element.watVisibility(titleText).getText();
+        String text =element.watVisibility(titleText).getText();
         return text;
     }*/
 
@@ -36,22 +42,28 @@ public class MainPage {
     }
 
     public MainPage typeSearchField(String text) {
-        Driver.getDriver().findElement(searchField).sendKeys("text");
+        Driver.getDriver().findElement(searchField).sendKeys(text);
         return this;
     }
+
+    public SearchPage clickSearchButton(String text) {
+        this.typeSearchField(text);
+        Driver.getDriver().findElement(searchButton).submit();
+        return new SearchPage();
+    }
+
     public MainPage clearSearchField() {
         Driver.getDriver().findElement(searchField).clear();
         return this;
     }
 
-    public SearchPage clickSearchButton() {
-        Driver.getDriver().findElement(searchButton).click();
-        return new SearchPage();
+    public void clickLoginNameLink() {
+        Driver.getDriver().findElement(loginNameLink).click();
     }
 
-    public MainPage clickMailLink() {
-        Driver.getDriver().findElement(mailLink).click();
-        return this;
+    public boolean getEmailLoginName() {
+        Driver.getDriver().findElement(emailLoginName).getText();
+        return true;
     }
 
     public void clickCoronavirusLink() {
@@ -97,6 +109,11 @@ public class MainPage {
     public void clickMoreLink() {
         Driver.getDriver().findElement(moreLink).click();
     }
+
+    /*public MailPage clickMailLink() {
+            Driver.getDriver().findElement(mailLink).click();
+            return new MailPage;
+        }*/
 
     public SignInPage clickLogIn() {
         Driver.getDriver().findElement(signInButton).click();
