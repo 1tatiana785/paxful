@@ -14,14 +14,13 @@ public class SignInPage {
         return this;
     }
 
-    /*public SignInPage clickCreateAccount() {
+    public void clickCreateAccount() {
         Driver.getDriver().findElement(createAccountButton).click();
-        return ;
-    }   */
+    }
 
-    public EnterPasswordPage singInNext(String username) {
+    public void singInNext(String username) {
         this.typeUserName(username);
         Driver.getDriver().findElement(nextButton).click();
-        return new EnterPasswordPage();
+
     }
 }

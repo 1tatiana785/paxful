@@ -8,10 +8,10 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 final public class Driver {
 
-    private static WebDriver driver = null;
+    private static WebDriver driver;
 
-    /*private Driver() {
-    }*/
+    private Driver() {
+    }
 
     public static WebDriver getDriver() {
         String typeDriver = "Firefox";

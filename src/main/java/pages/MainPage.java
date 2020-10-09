@@ -28,7 +28,7 @@ public class MainPage {
 
     WebElment element = new WebElment();
 
-        public MainPage getTitle() {
+    public MainPage getTitle() {
         Driver.getDriver().getTitle();
         return this;
     }
@@ -37,7 +37,7 @@ public class MainPage {
         return text;
     }*/
 
-    public void startPage () {
+    public void startPage() {
         Driver.getDriver().get("http://yahoo.com/");
     }
 
@@ -46,10 +46,9 @@ public class MainPage {
         return this;
     }
 
-    public SearchPage clickSearchButton(String text) {
+    public void clickSearchButton(String text) {
         this.typeSearchField(text);
         Driver.getDriver().findElement(searchButton).submit();
-        return new SearchPage();
     }
 
     public MainPage clearSearchField() {
@@ -110,13 +109,11 @@ public class MainPage {
         Driver.getDriver().findElement(moreLink).click();
     }
 
-    /*public MailPage clickMailLink() {
-            Driver.getDriver().findElement(mailLink).click();
-            return new MailPage;
-        }*/
+    public void clickMailLink() {
+        Driver.getDriver().findElement(mailLink).click();
+    }
 
-    public SignInPage clickLogIn() {
+    public void clickLogIn() {
         Driver.getDriver().findElement(signInButton).click();
-        return new SignInPage();
     }
 }

@@ -1,12 +1,15 @@
 import Core.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
 
 import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.assertEquals;
 
 
@@ -21,48 +24,32 @@ public class MainPageTest {
     public void setUp() {
        }*/
 
-    @Test
+/*    @Test
     public void logIn() {
 
         mainPage.startPage();
         mainPage.clickLogIn();
         signInPage.singInNext("t_test_t@yahoo.com");
+        enterPasswordPage.clickVisibilityButton();
         enterPasswordPage.passwordClickNext("test123456789");
+        mainPage.clickLoginNameLink();
+        //Driver.getDriver().navigate().refresh();
+        assertEquals(mainPage.getEmailLoginName(), "t_test_t");
+    }*/
 
-       // mainPage.clickLoginNameLink();
-
-        //assertEquals(mainPage.getEmailLoginName(), "t_test_t");
-
-    }
-
-    /*@Test
+    @Test
     public void maimPageTest() {
 
         mainPage.startPage();
 
-        //mainPage.typeSearchField("gg");
-        //mainPage.clearSearchField();
-        //  Driver.getDriver().navigate().refresh();
-
-        //assertEquals(mainPage.getTitle(), "pages.MainPage@525575");
-
+        mainPage.typeSearchField("!!!!!!!!!!!");
+        mainPage.clearSearchField();
+        MainPage title = mainPage.getTitle();
+        assertEquals(mainPage.getTitle(), title);
         mainPage.clickSearchButton("text");
         Driver.getDriver().navigate().back();
-    }*/
-}
-
-   /* @Test
-    public void click() {
-        mainPage.clickLogIn();
-
-        //SignInPage signInPage = mainPage.clickLogIn();
     }
 
-
-    @AfterClass                              // виполнится после выполнения всех методов
-    public void afterClassMethod() {
-        // driver.quit();
-    }
 }
 
 
@@ -78,6 +65,8 @@ public class MainPageTest {
 
     public void teardown(){
     }
+    /*@AfterClass                              // виполнится после выполнения всех методов
+    public void afterClassMethod() {
+        // driver.quit();
+    }*/
 
-
- */
