@@ -1,16 +1,10 @@
-import Core.Driver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
+import Core.InitialDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pages.*;
 
-import java.util.concurrent.TimeUnit;
-
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 
 public class MainPageTest {
@@ -19,54 +13,49 @@ public class MainPageTest {
     private SearchPage searchPage = new SearchPage();
     private SignInPage signInPage = new SignInPage();
     private EnterPasswordPage enterPasswordPage = new EnterPasswordPage();
-    private MainPageLogin mainPageLogin = new MainPageLogin();
+
+
     /*@BeforeTest                           //  запускаеться перед каждым тестовым методом
-    public void setUp() {
-       }*/
+    public void setUp() {}*/
 
-/*    @Test
+    //allure serve C:\_projects\testPaxful\allure-results /// see report
+
+    @Test
     public void logIn() {
-
         mainPage.startPage();
         mainPage.clickLogIn();
         signInPage.singInNext("t_test_t@yahoo.com");
         enterPasswordPage.clickVisibilityButton();
         enterPasswordPage.passwordClickNext("test123456789");
-        mainPage.clickLoginNameLink();
-        //Driver.getDriver().navigate().refresh();
-        assertEquals(mainPage.getEmailLoginName(), "t_test_t");
-    }*/
+    }
 
     @Test
-    public void maimPageTest() {
-
+    public void mainPageSearchTest() {
         mainPage.startPage();
-
+        mainPage.getTitle();
+        System.out.println(mainPage.getTitle());
         mainPage.typeSearchField("!!!!!!!!!!!");
         mainPage.clearSearchField();
-        MainPage title = mainPage.getTitle();
-        assertEquals(mainPage.getTitle(), title);
-        mainPage.clickSearchButton("text");
-        Driver.getDriver().navigate().back();
+        mainPage.clickSearchButton("news");
+        InitialDriver.getDriver().navigate().back();
     }
 
-}
 
+    /*mainPage.clickLoginNameLink();
+        assertEquals(mainPage.getEmailLoginName(), "t_test_t");
+        InitialDriver.getDriver().navigate().refresh();
+        MainPage title = mainPage.getTitle();
+        System.out.println(title);
+        MainPage title1 = mainPage.;
+        assertEquals(mainPage.getTitle(), title);*/
 
-
-
-
-
-/*
-/*@BeforeTest                           //  запускаеться перед каждым тестовым методом
+    /*  @BeforeTest                           //  запускаеться перед каждым тестовым методом
     public void setUp (){}
 
-     @AfterTest                              // запускаеться после каждого тестового метода
+    @AfterTest                              // запускаеться после каждого тестового метода
+    public void teardown(){   }
 
-    public void teardown(){
-    }
-    /*@AfterClass                              // виполнится после выполнения всех методов
-    public void afterClassMethod() {
-        // driver.quit();
-    }*/
+    @AfterClass                              // виполнится после выполнения всех методов
+    public void afterClassMethod() { driver.quit();}*/
 
+}

@@ -1,6 +1,6 @@
 package pages;
 
-import Core.Driver;
+import Core.InitialDriver;
 import org.openqa.selenium.By;
 
 public class SearchPage {
@@ -11,7 +11,7 @@ public class SearchPage {
 
 
      public String getTitleText() {
-        String text = Driver.getDriver().getTitle();
+        String text = InitialDriver.getDriver().getTitle();
         return text;
     }
 }

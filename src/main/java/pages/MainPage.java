@@ -1,6 +1,6 @@
 package pages;
 
-import Core.Driver;
+import Core.InitialDriver;
 import Core.WebElment;
 import org.openqa.selenium.By;
 
@@ -9,7 +9,7 @@ public class MainPage {
 
     private By searchField = By.id("ybar-sbq");
     private By searchButton = By.className("rapid-noclick-resp");
-    private By signInButton = By.className("_yb_19y2m");
+    private By signInButton = By.linkText("Sign in");
     private By titleText = By.xpath("//title[text()='Yahoo']");
     private By mailLink = By.className("_yb_1qge5 ");
     private By coronavirusLink = By.partialLinkText("Coronavirus");
@@ -23,97 +23,98 @@ public class MainPage {
     private By shoppingLink = By.linkText("Shopping  ");
     private By premiumOffersLink = By.linkText(" Premium Offers  ");
     private By moreLink = By.linkText(" More...  ");
-    private By loginNameLink = By.className("_yb_z3kiw");
+    private By loginNameLink = By.className("rapid-nonanchor-lt _yb_eun8m");    //By.xpath("//input[@id='ybarAccountMenu']");
     private By emailLoginName = By.className("_yb_1611y");
 
     WebElment element = new WebElment();
 
     public MainPage getTitle() {
-        Driver.getDriver().getTitle();
+        InitialDriver.getDriver().getTitle();
         return this;
     }
+
     /*public String getTitleText() {
         String text =element.watVisibility(titleText).getText();
         return text;
     }*/
 
     public void startPage() {
-        Driver.getDriver().get("http://yahoo.com/");
+        InitialDriver.getDriver().get("http://yahoo.com/");
     }
 
+    public void clickLogIn() {
+        InitialDriver.getDriver().findElement(signInButton).click();
+    }
+
+    public void clickLoginNameLink() {
+        InitialDriver.getDriver().findElement(loginNameLink).click();
+    }
+
+    public boolean getEmailLoginName() {
+        InitialDriver.getDriver().findElement(emailLoginName).getText();
+        return true;
+    }
+
+
     public MainPage typeSearchField(String text) {
-        Driver.getDriver().findElement(searchField).sendKeys(text);
+        InitialDriver.getDriver().findElement(searchField).sendKeys(text);
         return this;
     }
 
     public void clickSearchButton(String text) {
-        this.typeSearchField(text);
-        Driver.getDriver().findElement(searchButton).submit();
+        typeSearchField(text);
+        InitialDriver.getDriver().findElement(searchButton).submit();
     }
 
     public MainPage clearSearchField() {
-        Driver.getDriver().findElement(searchField).clear();
+        InitialDriver.getDriver().findElement(searchField).clear();
         return this;
     }
-
-    public void clickLoginNameLink() {
-        Driver.getDriver().findElement(loginNameLink).click();
-    }
-
-    public boolean getEmailLoginName() {
-        Driver.getDriver().findElement(emailLoginName).getText();
-        return true;
-    }
-
     public void clickCoronavirusLink() {
-        Driver.getDriver().findElement(coronavirusLink).click();
+        InitialDriver.getDriver().findElement(coronavirusLink).click();
     }
 
     public void clickNewsLink() {
-        Driver.getDriver().findElement(newsLink).click();
+        InitialDriver.getDriver().findElement(newsLink).click();
     }
 
     public void clickFinanceLink() {
-        Driver.getDriver().findElement(financeLink).click();
+        InitialDriver.getDriver().findElement(financeLink).click();
     }
 
     public void clickSportsLink() {
-        Driver.getDriver().findElement(sportsLink).click();
+        InitialDriver.getDriver().findElement(sportsLink).click();
     }
 
     public void clickElectionLink() {
-        Driver.getDriver().findElement(electionLink).click();
+        InitialDriver.getDriver().findElement(electionLink).click();
     }
 
     public void clickBlmLink() {
-        Driver.getDriver().findElement(blmLink).click();
+        InitialDriver.getDriver().findElement(blmLink).click();
     }
 
     public void clickEntertainmentLink() {
-        Driver.getDriver().findElement(entertainmentLink).click();
+        InitialDriver.getDriver().findElement(entertainmentLink).click();
     }
 
-    public void clickLifeLink() {
-        Driver.getDriver().findElement(lifeLink).click();
-    }
+    public void clickLifeLink() { InitialDriver.getDriver().findElement(lifeLink).click(); }
 
     public void clickShoppingLink() {
-        Driver.getDriver().findElement(shoppingLink).click();
+        InitialDriver.getDriver().findElement(shoppingLink).click();
     }
 
     public void clickPremiumOffersLink() {
-        Driver.getDriver().findElement(premiumOffersLink).click();
+        InitialDriver.getDriver().findElement(premiumOffersLink).click();
     }
 
     public void clickMoreLink() {
-        Driver.getDriver().findElement(moreLink).click();
+        InitialDriver.getDriver().findElement(moreLink).click();
     }
 
     public void clickMailLink() {
-        Driver.getDriver().findElement(mailLink).click();
+        InitialDriver.getDriver().findElement(mailLink).click();
     }
 
-    public void clickLogIn() {
-        Driver.getDriver().findElement(signInButton).click();
-    }
+
 }

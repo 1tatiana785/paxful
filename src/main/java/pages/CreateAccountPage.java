@@ -1,6 +1,6 @@
 package pages;
 
-import Core.Driver;
+import Core.InitialDriver;
 import org.openqa.selenium.By;
 
 public class CreateAccountPage {
@@ -18,46 +18,46 @@ public class CreateAccountPage {
 
 
     public void typeFirstName(String firstname) {
-        Driver.getDriver().findElement(firstNameField).sendKeys("");
+        InitialDriver.getDriver().findElement(firstNameField).sendKeys("");
     }
 
     public CreateAccountPage typeLastName(String lastname) {
-        Driver.getDriver().findElement(lastNameField).sendKeys("");
+        InitialDriver.getDriver().findElement(lastNameField).sendKeys("");
         return this;
     }
 
     public CreateAccountPage typeEmail(String email) {
-        Driver.getDriver().findElement(emailNameField).sendKeys("");
+        InitialDriver.getDriver().findElement(emailNameField).sendKeys("");
         return this;
     }
 
     public CreateAccountPage typePassword(String password) {
-        Driver.getDriver().findElement(passwordField).sendKeys("");
+        InitialDriver.getDriver().findElement(passwordField).sendKeys("");
         return this;
     }
 
     public CreateAccountPage typePhone(String phone) {
-        Driver.getDriver().findElement(phoneField).sendKeys("");
+        InitialDriver.getDriver().findElement(phoneField).sendKeys("");
         return this;
     }
 
     public CreateAccountPage typeDay(String day) {
-        Driver.getDriver().findElement(dayField).sendKeys("");
+        InitialDriver.getDriver().findElement(dayField).sendKeys("");
         return this;
     }
 
     public CreateAccountPage typeYear(String year) {
-        Driver.getDriver().findElement(yearField).sendKeys("");
+        InitialDriver.getDriver().findElement(yearField).sendKeys("");
         return this;
     }
 
     public CreateAccountPage typeGender(String gender) {
-        Driver.getDriver().findElement(genderField).sendKeys("");
+        InitialDriver.getDriver().findElement(genderField).sendKeys("");
         return this;
     }
 
     public CreateAccountPage clickContinue() {
-        Driver.getDriver().findElement(continueButton).click();
+        InitialDriver.getDriver().findElement(continueButton).click();
         return this;
     }
 

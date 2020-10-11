@@ -6,11 +6,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-final public class Driver {
+final public class InitialDriver {
 
     private static WebDriver driver;
 
-    private Driver() {
+    private InitialDriver() {
     }
 
     public static WebDriver getDriver() {
