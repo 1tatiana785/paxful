@@ -2,6 +2,7 @@ package pages;
 
 import Core.InitialDriver;
 import Core.WebElment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 
@@ -10,6 +11,7 @@ public class MainPage {
     private By searchField = By.id("ybar-sbq");
     private By searchButton = By.className("rapid-noclick-resp");
     private By signInButton = By.linkText("Sign in");
+    private By logo = By.xpath("//a[@id='ybar-logo']/img");
     private By titleText = By.xpath("//title[text()='Yahoo']");
     private By mailLink = By.className("_yb_1qge5 ");
     private By coronavirusLink = By.partialLinkText("Coronavirus");
@@ -23,53 +25,52 @@ public class MainPage {
     private By shoppingLink = By.linkText("Shopping  ");
     private By premiumOffersLink = By.linkText(" Premium Offers  ");
     private By moreLink = By.linkText(" More...  ");
-    private By loginNameLink = By.className("rapid-nonanchor-lt _yb_eun8m");    //By.xpath("//input[@id='ybarAccountMenu']");
-    private By emailLoginName = By.className("_yb_1611y");
+    private By loginNameLink = By.className("rapid-nonanchor-lt");    //By.xpath("//input[@id='ybarAccountMenu']");
 
     WebElment element = new WebElment();
 
-    public MainPage getTitle() {
-        InitialDriver.getDriver().getTitle();
-        return this;
+    @Step("verifying main page logo is displayed step ...")
+    public boolean getLogo() {
+        element.watVisibility(logo);
+        InitialDriver.getDriver().findElement(logo).isDisplayed();
+        return true;
     }
 
-    /*public String getTitleText() {
-        String text =element.watVisibility(titleText).getText();
+    @Step("getting main page title step ...")
+    public String getTitle() {
+        String text = InitialDriver.getDriver().findElement(titleText).getText();
         return text;
-    }*/
-
-    public void startPage() {
-        InitialDriver.getDriver().get("http://yahoo.com/");
     }
 
+    @Step("click signIn button step ...")
     public void clickLogIn() {
         InitialDriver.getDriver().findElement(signInButton).click();
     }
 
-    public void clickLoginNameLink() {
-        InitialDriver.getDriver().findElement(loginNameLink).click();
-    }
-
-    public boolean getEmailLoginName() {
-        InitialDriver.getDriver().findElement(emailLoginName).getText();
-        return true;
-    }
-
-
-    public MainPage typeSearchField(String text) {
+    @Step("set text in the search field step ...")
+    public pages.MainPage typeSearchField(String text) {
         InitialDriver.getDriver().findElement(searchField).sendKeys(text);
         return this;
     }
 
+    @Step("click search button step ...")
     public void clickSearchButton(String text) {
         typeSearchField(text);
         InitialDriver.getDriver().findElement(searchButton).submit();
     }
 
-    public MainPage clearSearchField() {
+    @Step("clear search field step ...")
+    public pages.MainPage clearSearchField() {
         InitialDriver.getDriver().findElement(searchField).clear();
         return this;
     }
+
+    @Step("getting login name step ...")
+    public String getLoginNameLink() {
+        String text = InitialDriver.getDriver().findElement(loginNameLink).getText();
+        return text;
+    }
+
     public void clickCoronavirusLink() {
         InitialDriver.getDriver().findElement(coronavirusLink).click();
     }
@@ -98,7 +99,9 @@ public class MainPage {
         InitialDriver.getDriver().findElement(entertainmentLink).click();
     }
 
-    public void clickLifeLink() { InitialDriver.getDriver().findElement(lifeLink).click(); }
+    public void clickLifeLink() {
+        InitialDriver.getDriver().findElement(lifeLink).click();
+    }
 
     public void clickShoppingLink() {
         InitialDriver.getDriver().findElement(shoppingLink).click();
@@ -115,6 +118,4 @@ public class MainPage {
     public void clickMailLink() {
         InitialDriver.getDriver().findElement(mailLink).click();
     }
-
-
 }

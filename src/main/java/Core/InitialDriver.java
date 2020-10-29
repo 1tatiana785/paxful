@@ -1,35 +1,56 @@
 package Core;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import java.util.concurrent.TimeUnit;
 
 final public class InitialDriver {
 
-    private static WebDriver driver;
+    private static final ThreadLocal<InitialDriver> driverThread = new ThreadLocal<>();
+    private static WebDriver driver = null;
+
+    public static InitialDriver getInstance() {
+        if (driverThread.get() == null) {
+            synchronized (InitialDriver.class) {
+                driverThread.set(new InitialDriver());
+            }
+        }
+        return driverThread.get();
+    }
 
     private InitialDriver() {
     }
 
     public static WebDriver getDriver() {
-        String typeDriver = "Firefox";
+        //singleton pattern
         if (driver == null) {
-            switch (typeDriver) {
-                case "Firefox": {
-                    System.setProperty("webdriver.gecko.driver", "C:\\_projects\\testSelenium\\drivers\\geckodriver.exe");
-                    driver = new FirefoxDriver(new FirefoxOptions());
-                    break;
-                }
-                case "CHROME": {
-                    System.setProperty("webdriver.chrome.driver", "C:\\_projects\\testSelenium\\drivers\\chromedriver.exe");
-                    driver = new ChromeDriver(new ChromeOptions());
-                    break;
-                }
+            if (Constants.browserName.equalsIgnoreCase("chrome")) {
+                System.setProperty("webdriver.chrome.driver", "C:\\_projects\\testSelenium\\drivers\\chromedriver.exe");
+                driver = new ChromeDriver(new ChromeOptions());
+            } else if (Constants.browserName.equalsIgnoreCase("firefox")) {
+                System.setProperty("webdriver.gecko.driver", "C:\\_projects\\testSelenium\\drivers\\geckodriver.exe");
+                driver = new FirefoxDriver(new FirefoxOptions());
             }
+            driver.manage().deleteAllCookies();
+            driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+            driver.manage().window().maximize();
+            driver.get(Constants.url);
         }
-
         return driver;
+    }
+
+    public static void quite() {
+        System.out.println("quitting the browser");
+        driver.quit();
+        driver = null;
+    }
+
+    public static void close() {
+        System.out.println("closing the browser");
+        driver.close();
+        driver = null;
     }
 }

@@ -1,12 +1,12 @@
+import Core.Constants;
 import Core.InitialDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
+import Core.Listener;
+import io.qameta.allure.*;
+import org.testng.Assert;
+import org.testng.annotations.*;
 import pages.*;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
-
+@Listeners({Listener.class})
 public class MainPageTest {
 
     private MainPage mainPage = new MainPage();
@@ -15,47 +15,67 @@ public class MainPageTest {
     private EnterPasswordPage enterPasswordPage = new EnterPasswordPage();
 
 
-    /*@BeforeTest                           //  запускаеться перед каждым тестовым методом
-    public void setUp() {}*/
+    //allure serve C:\_projects\testPaxful\allure-results          /// see report
+    // mvn clean test
+    @BeforeClass
+    public void setUp() {
+        InitialDriver.getDriver();
+    }
 
-    //allure serve C:\_projects\testPaxful\allure-results /// see report
+/*    @BeforeTest                           //  запускаеться перед каждым тестовым методом
+    public void setExtent() {
+    }*/
 
-    @Test
+    @Test(priority = 1, description = "verifying login test")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Case Description: Test verify login test")
+    @Story("Story Name: To check login functionality")
+    @Feature("Login")
     public void logIn() {
-        mainPage.startPage();
         mainPage.clickLogIn();
         signInPage.singInNext("t_test_t@yahoo.com");
         enterPasswordPage.clickVisibilityButton();
         enterPasswordPage.passwordClickNext("test123456789");
+        mainPage.getLoginNameLink();
+        System.out.println("Login name is " + mainPage.getLoginNameLink());
+        Assert.assertEquals(mainPage.getLoginNameLink(), "test11");
     }
 
-    @Test
-    public void mainPageSearchTest() {
-        mainPage.startPage();
-        mainPage.getTitle();
+    @Test(priority = 1, description = "verifying title test")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Case Description: Test verify title test")
+    @Story("Story Name: To check title test")
+    @Feature("Validate title")
+    public void mainPageTitle() {
         System.out.println(mainPage.getTitle());
+        Assert.assertEquals(mainPage.getTitle(), Constants.mainPageTitle);
+    }
+
+    @Test(priority = 1, description = "verifying logo test")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Case Description: Test verify logo test")
+    @Story("Story Name: To check logo test")
+    @Feature("Validate logo")
+    public void logoTest() {
+        Assert.assertEquals(mainPage.getLogo(), true);
+    }
+
+    @Test(priority = 2, description = "verifying search field test")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Case Description: Test verify search field test")
+    @Story("Story Name: Use search field test")
+    @Feature("Validate search field")
+    public void mainPageSearchTest() {
         mainPage.typeSearchField("!!!!!!!!!!!");
         mainPage.clearSearchField();
         mainPage.clickSearchButton("news");
-        InitialDriver.getDriver().navigate().back();
     }
 
+/*    @AfterTest                              // запускаеться после каждого тестового метода
+       }*/
 
-    /*mainPage.clickLoginNameLink();
-        assertEquals(mainPage.getEmailLoginName(), "t_test_t");
-        InitialDriver.getDriver().navigate().refresh();
-        MainPage title = mainPage.getTitle();
-        System.out.println(title);
-        MainPage title1 = mainPage.;
-        assertEquals(mainPage.getTitle(), title);*/
-
-    /*  @BeforeTest                           //  запускаеться перед каждым тестовым методом
-    public void setUp (){}
-
-    @AfterTest                              // запускаеться после каждого тестового метода
-    public void teardown(){   }
-
-    @AfterClass                              // виполнится после выполнения всех методов
-    public void afterClassMethod() { driver.quit();}*/
-
+    @AfterClass                             // виполнится после выполнения всех методов
+    public void tearDown() {
+        InitialDriver.quite();
+    }
 }

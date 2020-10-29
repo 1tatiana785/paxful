@@ -1,72 +1,89 @@
 package Core;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Listener implements ITestListener {
-
     private static String getMethodName(ITestResult iTestResult) {
         return iTestResult.getMethod().getConstructorOrMethod().getName();
     }
 
+    //Text attachment for Allure
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshotPNG(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    // Text attachment for Allure
+    @Attachment(value = "{0}", type = "text/plain")
+    public static String saveTextLog(String message) {
+        return message;
+    }
+
+    //HTML attachment for Allure
+    @Attachment(value = "{0}", type = "text/html")
+    public static String attachHtml(String html) {
+        return html;
+    }
+
     @Override
     public void onStart(ITestContext iTestContext) {
-        System.out.println("OnStart method Called " + iTestContext.getName());
+        System.out.println("OnStart method called " + iTestContext.getName());
         iTestContext.setAttribute("WebDriver", InitialDriver.getDriver());
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        System.out.println("OnFinish method Called " + iTestContext.getName());
-        //Do tier down operations for extentreports reporting!
-//        Reports.start_test();
-//        Reports.end_report();
+        System.out.println("OnFinish method called " + iTestContext.getName());
     }
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        System.out.println("OnTestStart method Called " + getMethodName(iTestResult) + " start");
-        //System.out.println("OnTestStart method Called");
+        System.out.println("OnTestStart method called " + getMethodName(iTestResult) + " start");
     }
 
     @Override
-    public void onTestSuccess(ITestResult iTestResult) {
-
-        System.out.println("OnTestSuccess method Called " + getMethodName(iTestResult) + " Passed");
-  /*      //ExtentReports log operation for passed tests.
-        Reports.start_test().log(Status.PASS, "Test passed");*/
+    public void onTestSuccess(ITestResult arg0) {
+        System.out.println("OnTestSuccess method called " + getMethodName(arg0) + " Passed");
     }
 
     @Override
-    public void onTestFailure(ITestResult iTestResult) {
-        System.out.println("OnTestFailure method Called " + getMethodName(iTestResult) + " Failed");
-/*//Get driver from BaseTest and assign to local webDriver variable.
-        Object testClass = iTestResult.getInstance();
-        WebDriver webDriver = driver;//Take base64Screenshot screenshot.
-        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) webDriver).
-        getScreenshotAs(OutputType.BASE64);
-        //ExtentReports log and screenshot operations for failed tests.
-        Reports.start_test().log(Status.FAIL, "Test Failed");*/
+    public void onTestFailure(ITestResult arg0) {
+        System.out.println("OnTestFailure method Called " + getMethodName(arg0) + " Failed");
+        //Get driver from InitialDriver and assign to local webDriver variable.
+        Object testClass = arg0.getInstance();
+        WebDriver driver = InitialDriver.getDriver();
+
+        //Allure ScreenshotRobot and SaveRTestingLog
+        if (driver instanceof WebDriver) {
+            System.out.println("Screenshot captured for test case: " + getMethodName(arg0));
+            saveScreenshotPNG(driver);
+            //Take screenshot
+           String base64 = ((TakesScreenshot) InitialDriver.getInstance().getDriver()).getScreenshotAs(OutputType.BASE64);
+           byte[] screenShot = ((TakesScreenshot) InitialDriver.getInstance().getDriver()).getScreenshotAs(OutputType.BYTES);
+            // Allure.addAttachment("Any Name", new ByteArrayInputStream(((TakesScreenshot)InitialDriver.getDriver()).getScreenshotAs(OutputType.BYTES)));
+            Allure.getLifecycle().addAttachment(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy_hh:mm:ss")), "image/png", "png", screenShot);
+
+        }
+        //Save a log on allure
+        saveTextLog(getMethodName(arg0) + " failed and screenshot taken!");
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         System.out.println("OnTestSkipped method Called " + getMethodName(iTestResult) + " skipped");
-    /*  //ExtentReports log operation for skipped tests.
-        Reports.start_test().log(Status.SKIP, "Test Skipped");*/
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
         System.out.println("Test failed but it is in defined success ratio " + getMethodName(iTestResult));
-            /*public void onException(Throwable error, WebDriver driver) {
-        System.out.println("Exception occured: " + error);
-        try {
-        TestUtil.takeScreenshotAtEndOfTest();
-        } catch (IOException e) {
-        e.printStackTrace();
-        }*/
     }
-
 }
