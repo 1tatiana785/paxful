@@ -4,10 +4,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Options {
 
-    public ChromeOptions ChromeOptions()
+    /*public ChromeOptions ChromeOptions()
     {
        return new ChromeOptions().addArguments("driver");
     }
 
-
+*/
 }

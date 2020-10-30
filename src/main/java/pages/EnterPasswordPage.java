@@ -2,6 +2,7 @@ package pages;
 
 import Core.InitialDriver;
 import Core.WebElment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class EnterPasswordPage {
@@ -13,24 +14,19 @@ public class EnterPasswordPage {
 
     WebElment element = new WebElment();
 
-
-       /*public String getTitleText() {
-        String text =element.watVisibility(titleText).getText();
-        return text;
-    }*/
-
+    @Step("click visibility button step ...")
     public void clickVisibilityButton() {
-        element.watClick(visibilityButton).click();
         InitialDriver.getDriver().findElement(visibilityButton).click();
-
     }
 
+    @Step("type password: {0} step ...")
     public EnterPasswordPage typePassword(String password) {
         element.watClick(passwordField).click();
         InitialDriver.getDriver().findElement(passwordField).sendKeys("test123456789");
         return this;
     }
 
+    @Step("click enter password page next button step ...")
     public void passwordClickNext(String password) {
         InitialDriver.getDriver().findElement(visibilityButton).click();
         typePassword(password);
