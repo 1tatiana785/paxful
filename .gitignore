@@ -3,3 +3,5 @@ target
 debug.log
 pom.xml
 src/main/resources
+.idea
+drivers
