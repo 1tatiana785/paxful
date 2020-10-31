@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 import pages.*;
 
 @Listeners({Listener.class})
-public class MainPageTest {
+public class ParallelMethodTest {
 
     private MainPage mainPage = new MainPage();
     private SearchPage searchPage = new SearchPage();
@@ -19,6 +19,7 @@ public class MainPageTest {
     // mvn clean test
     @BeforeClass
     public void setUp() {
+        long id = Thread.currentThread().getId();
         InitialDriver.getDriver();
     }
 
@@ -32,13 +33,14 @@ public class MainPageTest {
     @Story("Story Name: To check login functionality")
     @Feature("Login")
     public void logIn() {
+        long id = Thread.currentThread().getId();
         mainPage.clickLogIn();
         signInPage.singInNext("t_test_t@yahoo.com");
         enterPasswordPage.clickVisibilityButton();
         enterPasswordPage.passwordClickNext("test123456789");
         mainPage.getLoginNameLink();
         System.out.println("Login name is " + mainPage.getLoginNameLink());
-        Assert.assertEquals(mainPage.getLoginNameLink(), "test");
+        Assert.assertEquals(mainPage.getLoginNameLink(), "test111");
     }
 
     @Test(priority = 1, description = "verifying title test")
@@ -47,6 +49,7 @@ public class MainPageTest {
     @Story("Story Name: To check title test")
     @Feature("Validate title")
     public void mainPageTitle() {
+        long id = Thread.currentThread().getId();
         System.out.println(mainPage.getTitle());
        // Assert.assertEquals(mainPage.getTitle(), Constants.mainPageTitle);
     }
@@ -57,6 +60,7 @@ public class MainPageTest {
     @Story("Story Name: To check logo test")
     @Feature("Validate logo")
     public void logoTest() {
+        long id = Thread.currentThread().getId();
         Assert.assertEquals(mainPage.checkLogo(), true);
     }
 
@@ -66,6 +70,7 @@ public class MainPageTest {
     @Story("Story Name: Use search field test")
     @Feature("Validate search field")
     public void mainPageSearchTest() {
+        long id = Thread.currentThread().getId();
         mainPage.typeSearchField("!!!!!!!!!!!");
         mainPage.clearSearchField();
         mainPage.clickSearchButton("news");
@@ -76,6 +81,6 @@ public class MainPageTest {
 
     @AfterClass                             // виполнится после выполнения всех методов
     public void tearDown() {
-        InitialDriver.quite();
+        long id = Thread.currentThread().getId();InitialDriver.quite();
     }
 }

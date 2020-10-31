@@ -5,3 +5,4 @@ pom.xml
 src/main/resources
 .idea
 drivers
+methods-test-testng.xml
