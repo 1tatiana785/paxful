@@ -1,0 +1,5 @@
+allure-results
+target
+debug.log
+pom.xml
+src/main/resources
