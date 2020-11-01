@@ -2,9 +2,12 @@ import Core.Constants;
 import Core.InitialDriver;
 import Core.Listener;
 import io.qameta.allure.*;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.*;
+
+import java.lang.ref.PhantomReference;
 
 @Listeners({Listener.class})
 public class ParallelMethodTest {
@@ -19,7 +22,7 @@ public class ParallelMethodTest {
     // mvn clean test
     @BeforeClass
     public void setUp() {
-        long id = Thread.currentThread().getId();
+        long id = Thread.currentThread().getId(); // parallel tests
         InitialDriver.getDriver();
     }
 
@@ -27,20 +30,19 @@ public class ParallelMethodTest {
     public void setExtent() {
     }*/
 
-    @Test(priority = 1, description = "verifying login test")
+    @Test(priority = 2, description = "verifying login test")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Case Description: Test verify login test")
     @Story("Story Name: To check login functionality")
     @Feature("Login")
     public void logIn() {
-        long id = Thread.currentThread().getId();
         mainPage.clickLogIn();
         signInPage.singInNext("t_test_t@yahoo.com");
         enterPasswordPage.clickVisibilityButton();
         enterPasswordPage.passwordClickNext("test123456789");
         mainPage.getLoginNameLink();
         System.out.println("Login name is " + mainPage.getLoginNameLink());
-        Assert.assertEquals(mainPage.getLoginNameLink(), "test111");
+        Assert.assertEquals(mainPage.getLoginNameLink(), "test123");
     }
 
     @Test(priority = 1, description = "verifying title test")
@@ -49,7 +51,6 @@ public class ParallelMethodTest {
     @Story("Story Name: To check title test")
     @Feature("Validate title")
     public void mainPageTitle() {
-        long id = Thread.currentThread().getId();
         System.out.println(mainPage.getTitle());
        // Assert.assertEquals(mainPage.getTitle(), Constants.mainPageTitle);
     }
@@ -59,18 +60,17 @@ public class ParallelMethodTest {
     @Description("Test Case Description: Test verify logo test")
     @Story("Story Name: To check logo test")
     @Feature("Validate logo")
-    public void logoTest() {
-        long id = Thread.currentThread().getId();
+    public void checkLogoTest() {
         Assert.assertEquals(mainPage.checkLogo(), true);
+       // System.out.println(mainPage.getLogo());
     }
 
-    @Test(priority = 2, description = "verifying search field test")
+    @Test(priority = 3, description = "verifying search field test")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Case Description: Test verify search field test")
     @Story("Story Name: Use search field test")
     @Feature("Validate search field")
     public void mainPageSearchTest() {
-        long id = Thread.currentThread().getId();
         mainPage.typeSearchField("!!!!!!!!!!!");
         mainPage.clearSearchField();
         mainPage.clickSearchButton("news");
@@ -80,7 +80,6 @@ public class ParallelMethodTest {
        }*/
 
     @AfterClass                             // виполнится после выполнения всех методов
-    public void tearDown() {
-        long id = Thread.currentThread().getId();InitialDriver.quite();
+    public void tearDown() { InitialDriver.quite();
     }
 }

@@ -29,12 +29,18 @@ public class MainPage {
 
     WebElment element = new WebElment();
 
-    @Step("verifying main page logo is displayed step ...")
+    @Step("checking main page logo is displayed step ...")
     public boolean checkLogo() {
         element.watVisibility(logo);
         InitialDriver.getDriver().findElement(logo).isDisplayed();
         return true;
     }
+
+    /*@Step("getting main page logo step ...")
+    public String getLogo() {
+        String logoLocation = InitialDriver.getDriver().findElement(logo).getText();
+        return logoLocation;
+    }*/
 
 
     @Step("getting main page title step ...")

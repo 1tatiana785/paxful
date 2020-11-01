@@ -4,6 +4,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 final public class InitialDriver {
@@ -28,7 +30,10 @@ final public class InitialDriver {
         if (driver == null) {
             if (Constants.browserName.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", "C:\\_projects\\testPaxful\\drivers\\chromedriver.exe");
-                driver = new ChromeDriver(new ChromeOptions());
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                driver = new ChromeDriver(chromeOptions);
+
             } else if (Constants.browserName.equalsIgnoreCase("firefox")) {
                 System.setProperty("webdriver.gecko.driver", "C:\\_projects\\testPaxful\\drivers\\geckodriver.exe");
                 driver = new FirefoxDriver(new FirefoxOptions());
