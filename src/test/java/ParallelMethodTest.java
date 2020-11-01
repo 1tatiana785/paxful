@@ -22,7 +22,8 @@ public class ParallelMethodTest {
     // mvn clean test
     @BeforeClass
     public void setUp() {
-        long id = Thread.currentThread().getId(); // parallel tests
+        long id = Thread.currentThread().getId();
+        System.out.println("Before class-method. Thread id is: " + id);// parallel tests
         InitialDriver.getDriver();
     }
 
@@ -36,6 +37,8 @@ public class ParallelMethodTest {
     @Story("Story Name: To check login functionality")
     @Feature("Login")
     public void logIn() {
+        long id = Thread.currentThread().getId();
+        System.out.println("Verifying login test. Thread id is: " + id);
         mainPage.clickLogIn();
         signInPage.singInNext("t_test_t@yahoo.com");
         enterPasswordPage.clickVisibilityButton();
@@ -51,16 +54,20 @@ public class ParallelMethodTest {
     @Story("Story Name: To check title test")
     @Feature("Validate title")
     public void mainPageTitle() {
+        long id = Thread.currentThread().getId();
+        System.out.println("Verifying title test. Thread id is: " + id);
         System.out.println(mainPage.getTitle());
        // Assert.assertEquals(mainPage.getTitle(), Constants.mainPageTitle);
     }
 
-    @Test(priority = 1, description = "verifying logo test")
+    @Test(priority = 1, description = "Check logo test")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Test Case Description: Test verify logo test")
+    @Description("Test Case Description: Test chack logo test")
     @Story("Story Name: To check logo test")
-    @Feature("Validate logo")
+    @Feature("Check logo")
     public void checkLogoTest() {
+        long id = Thread.currentThread().getId();
+        System.out.println("Check logo test. Thread id is: " + id);
         Assert.assertEquals(mainPage.checkLogo(), true);
        // System.out.println(mainPage.getLogo());
     }
@@ -71,6 +78,8 @@ public class ParallelMethodTest {
     @Story("Story Name: Use search field test")
     @Feature("Validate search field")
     public void mainPageSearchTest() {
+        long id = Thread.currentThread().getId();
+        System.out.println("Verifying search field test. Thread id is: " + id);
         mainPage.typeSearchField("!!!!!!!!!!!");
         mainPage.clearSearchField();
         mainPage.clickSearchButton("news");
@@ -80,6 +89,9 @@ public class ParallelMethodTest {
        }*/
 
     @AfterClass                             // виполнится после выполнения всех методов
-    public void tearDown() { InitialDriver.quite();
+    public void tearDown() {
+        long id = Thread.currentThread().getId();
+        System.out.println("After test-method. Thread id is: " + id);
+        InitialDriver.quite();
     }
 }

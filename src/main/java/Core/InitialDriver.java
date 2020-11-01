@@ -48,13 +48,13 @@ final public class InitialDriver {
     }
 
     public static void quite() {
-        System.out.println("quitting the browser");
+        System.out.println("Quitting the browser");
         driver.quit();
         driver = null;
     }
 
     public static void close() {
-        System.out.println("closing the browser");
+        System.out.println("Closing the browser");
         driver.close();
         driver = null;
     }
